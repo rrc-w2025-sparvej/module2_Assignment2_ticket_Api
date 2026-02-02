@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import morgan from "morgan";
 
+
 const app: Express = express();
 
 // Middleware to parse JSON
@@ -18,5 +19,7 @@ app.get("/api/v1/health", (req: Request, res: Response) => {
     version: "1.0.0",
   });
 });
+
+
 
 export default app;
