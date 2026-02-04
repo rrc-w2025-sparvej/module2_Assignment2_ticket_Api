@@ -53,3 +53,42 @@ export function create(req: Request, res: Response) {
   res.status(HTTP_STATUS.CREATED).json(ticket);
 }
 
+export function update(req: Request, res: Response) {
+  const id = Number(req.params.id);
+  const { priority, status } = req.body;
+
+  const ticket = ticketService.getTicketById(id);
+
+  if (!ticket) {
+    return res
+      .status(HTTP_STATUS.NOT_FOUND)
+      .json({ message: "Ticket not found" });
+  }
+
+  if (priority && !["critical", "high", "medium", "low"].includes(priority)) {
+    return res
+      .status(HTTP_STATUS.BAD_REQUEST)
+      .json({
+        message:
+          "Invalid priority. Must be one of: critical, high, medium, low"
+      });
+  }
+
+  if (status && !["open", "in-progress", "resolved"].includes(status)) {
+    return res
+      .status(HTTP_STATUS.BAD_REQUEST)
+      .json({
+        message:
+          "Invalid status. Must be one of: open, in-progress, resolved"
+      });
+  }
+
+  const updatedTicket = ticketService.updateTicket(ticket, {
+    priority,
+    status
+  });
+
+  res.status(HTTP_STATUS.OK).json(updatedTicket);
+}
+
+
