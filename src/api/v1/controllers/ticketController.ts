@@ -105,4 +105,21 @@ export function remove(req: Request, res: Response) {
   res.status(HTTP_STATUS.OK).json({ message: "Ticket deleted" });
 }
 
+export function urgency(req: Request, res: Response) {
+  const id = Number(req.params.id);
+  const ticket = ticketService.getTicketById(id);
+
+  if (!ticket) {
+    return res
+      .status(HTTP_STATUS.NOT_FOUND)
+      .json({ message: "Ticket not found" });
+  }
+
+  const urgencyResult = ticketService.calculateUrgency(ticket);
+
+  res.status(HTTP_STATUS.OK).json({
+    ticket,
+    urgency: urgencyResult
+  });
+}
 

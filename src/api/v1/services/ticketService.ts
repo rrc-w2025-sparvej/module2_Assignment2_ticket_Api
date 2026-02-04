@@ -68,3 +68,4 @@ export function calculateUrgency(ticket: Ticket) {
 
   return { score, level: "LOW" };
 }
+
