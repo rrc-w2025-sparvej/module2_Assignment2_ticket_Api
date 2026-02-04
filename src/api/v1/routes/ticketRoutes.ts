@@ -8,5 +8,6 @@ router.get("/:id", controller.getById);
 router.post("/", controller.create);
 router.put("/:id", controller.update);
 router.delete("/:id", controller.remove);
+router.get("/:id/urgency", controller.urgency);
 
 export default router;
