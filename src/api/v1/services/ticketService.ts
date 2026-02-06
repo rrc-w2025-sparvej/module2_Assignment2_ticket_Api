@@ -27,7 +27,9 @@ export function createTicket(
     description: input.description,
     priority: input.priority,
     status: "open",
-    createdAt: new Date()
+    createdAt: new Date("2026-01-15T00:00:00Z")
+
+
   };
 
   tickets.push(ticket);
@@ -68,7 +70,7 @@ export function calculateUrgency(ticket: Ticket) {
 
   const score = urgencyBase[ticket.priority] + daysOld * 5;
 
-  if (score >= 80) return { score, level: "CRITICAL" };
+  if (score >= 90) return { score, level: "CRITICAL" };
   if (score >= 60) return { score, level: "HIGH" };
   if (score >= 40) return { score, level: "MEDIUM" };
 

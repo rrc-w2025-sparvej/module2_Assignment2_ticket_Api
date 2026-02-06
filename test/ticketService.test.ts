@@ -12,6 +12,7 @@ describe("Ticket urgency calculation", () => {
       priority: "high",
       status: "resolved",
       createdAt: new Date()
+
     };
 
     // Act
