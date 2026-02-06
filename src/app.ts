@@ -8,10 +8,12 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 
+// health check endpoint
 app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+// ticket API routes
 app.use("/api/v1/tickets", ticketRoutes);
 
 

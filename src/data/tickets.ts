@@ -1,6 +1,10 @@
+// Priority levels
 export type Priority = "critical" | "high" | "medium" | "low";
+
+// Status values
 export type Status = "open" | "in-progress" | "resolved";
 
+// Support ticket
 export interface Ticket {
   id: number;
   title: string;

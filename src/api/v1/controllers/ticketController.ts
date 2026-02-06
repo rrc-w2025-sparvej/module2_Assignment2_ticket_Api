@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 import { HTTP_STATUS } from "../../../constants/httpStatus";
 import * as ticketService from "../services/ticketService";
 
+// returns all support tickets
 export function getAll(req: Request, res: Response) {
   const tickets = ticketService.getAllTickets();
   res.status(HTTP_STATUS.OK).json(tickets);
 }
 
+// returns a single ticket by its ID
 export function getById(req: Request, res: Response) {
   const id = Number(req.params.id);
   const foundTicket = ticketService.getTicketById(id);
@@ -20,6 +22,7 @@ export function getById(req: Request, res: Response) {
   res.status(HTTP_STATUS.OK).json(foundTicket);
 }
 
+// create a new support ticket
 export function create(req: Request, res: Response) {
   const { title, description, priority } = req.body;
 
@@ -53,6 +56,7 @@ export function create(req: Request, res: Response) {
   res.status(HTTP_STATUS.CREATED).json(ticket);
 }
 
+// updates an existing tickket
 export function update(req: Request, res: Response) {
   const id = Number(req.params.id);
   const { priority, status } = req.body;
@@ -91,6 +95,7 @@ export function update(req: Request, res: Response) {
   res.status(HTTP_STATUS.OK).json(updatedTicket);
 }
 
+// deletes a ticket by its ID
 export function remove(req: Request, res: Response) {
   const id = Number(req.params.id);
   const ticket = ticketService.getTicketById(id);
@@ -105,6 +110,7 @@ export function remove(req: Request, res: Response) {
   res.status(HTTP_STATUS.OK).json({ message: "Ticket deleted" });
 }
 
+// returns the urgency info from the ticket
 export function urgency(req: Request, res: Response) {
   const id = Number(req.params.id);
   const ticket = ticketService.getTicketById(id);

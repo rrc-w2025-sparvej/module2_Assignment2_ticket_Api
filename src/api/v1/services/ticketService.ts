@@ -1,5 +1,6 @@
 import { tickets, Ticket, Priority, Status } from "../../../data/tickets";
 
+// base urgency
 const urgencyBase: Record<Priority, number> = {
   critical: 50,
   high: 30,
@@ -7,10 +8,12 @@ const urgencyBase: Record<Priority, number> = {
   low: 10
 };
 
+
 export function getAllTickets(): Ticket[] {
   return tickets;
 }
 
+// finds a ticket by ID
 export function getTicketById(id: number): Ticket | undefined {
   return tickets.find(ticket => ticket.id === id);
 }
@@ -31,6 +34,7 @@ export function createTicket(
   return ticket;
 }
 
+// Updates allowed on only priority and status 
 export function updateTicket(
   ticket: Ticket,
   updates: { priority?: Priority; status?: Status }
@@ -46,11 +50,13 @@ export function updateTicket(
   return ticket;
 }
 
+// Deletes a ticket by ID
 export function deleteTicket(id: number): void {
   const index = tickets.findIndex(ticket => ticket.id === id);
   tickets.splice(index, 1);
 }
 
+// Calculates urgency score and level for the ticket
 export function calculateUrgency(ticket: Ticket) {
   if (ticket.status === "resolved") {
     return { score: 0, level: "RESOLVED" };
